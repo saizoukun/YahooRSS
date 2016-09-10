@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+<!--
+h1 {
+color: green;
+}
+-->
+</style>
+<meta charset="utf-8">
+<title>さいぞうくんの隠れ家</title>
+
+<script>
+alert("Time()");
+  function Time() { //現在時刻を取得するメソッド
+    week = new Array("日","月","火","水","木","金","土");
+    year = (new Date()).getFullYear();
+    month = (new Date()).getMonth() + 1;
+    date = (new Date()).getDate();
+    day = (new Date()).getDay();
+    hours = (new Date()).getHours();
+    minutes = (new Date()).getMinutes();
+    seconds = (new Date()).getSeconds();
+      document.getElementById("Timer").value = year+"年"+month+"月"+date+"日"+"("+week[day]+") "+hours+"時"+minutes+"分"+seconds+"秒";
+      setTimeout("Time()",1000);
+}
+</script>
+</head>
+
+<body>
+<a href="http://headlines.yahoo.co.jp/rss/list" target="_blank">さいぞうくんの<h1>隠れ家</h1></a>
+<hr>
+<a href="http://localhost:8888/IT_top.htm">■ ITトピックス</a><br>
+<a href="http://localhost:8888/IT_media.htm">■ ITメディアビジネス</a><br>
+<a href="http://localhost:8888/IT_mobile.htm">■ ITメディアモバイル</a><br>
+<a href="http://localhost:8888/IT_enter.htm">■ ITメディアエンタープライズ</a><br>
+<a href="http://localhost:8888/IT_market.htm">■ ITメディアマーケティング</a><br>
+<a href="https://mail.google.com/mail/u/0/#inbox"><img src="computer_email.png" alt="メール"　width="100" height="100"></a><br>
+<a href="http://open.shonan.bunkyo.ac.jp/"><img src="daigaku_toudai.png" alt="メール"　width="100" height="100"></a><br>
+<p><a href="keisakusai/Desktop/cas_game"><img src="http://webpad.felicyle.com/wp-content/themes/webpad_2/images/single_dl_BT.gif" alt="HTML4.01_Transitional.zip ダウンロード" /></a></p>
+
+<hr>
+
+<script type="text/javascript"><!--
+// ****************
+//      下準備
+// ****************
+myDate    = new Date();                                    // 今日の日付データ取得
+myWeekTbl = new Array("日","月","火","水","木","金","土");  // 曜日テーブル定義
+myMonthTbl= new Array(31,28,31,30,31,30,31,31,30,31,30,31);// 月テーブル定義
+myYear = myDate.getFullYear();                                 // 年の取得
+if (((myYear%4)==0 && (myYear%100)!=0) || (myYear%400)==0){ // うるう年だったら...
+   myMonthTbl[1] = 29;                                     // 　２月を２９日とする
+}
+myMonth = myDate.getMonth();                               // 月を取得(0月～11月)
+myToday = myDate.getDate();                                // 今日の'日'を退避
+myDate.setDate(1);                                         // 日付を'１日'に変えて、
+myWeek = myDate.getDay();                                  // 　'１日'の曜日を取得
+myTblLine = Math.ceil((myWeek+myMonthTbl[myMonth])/7);     // カレンダーの行数
+myTable   = new Array(7*myTblLine);                        // 表のセル数分定義
+
+for(i=0; i<7*myTblLine; i++) myTable[i]="　";              // myTableを掃除する
+for(i=0; i<myMonthTbl[myMonth]; i++)myTable[i+myWeek]=i+1; // 日付を埋め込む
+
+// ***********************
+//      カレンダーの表示
+// ***********************
+document.write("<table border='1'>");      // 表の作成開始
+document.write("<tr><td colspan='7' bgcolor='#7fffd4'>");  // 見出し行セット
+document.write("<strong>",myYear, "年", (myMonth+1), "月カレンダー</strong>");
+document.write("</td></tr>");
+
+document.write("<tr>");                                    // 曜日見出しセット
+for(i=0; i<7; i++){                                        // 一行(１週間)ループ
+   document.write("<td align='center' ");
+   if(i==0)document.write("bgcolor='#fa8072'>");           // 日曜のセルの色
+   else    document.write("bgcolor='#ffebcd'>");           // 月～土のセルの色
+   document.write("<strong>",myWeekTbl[i],"</strong>");    // '日'から'土'の表示
+   document.write("</td>");
+}
+document.write("</tr>");
+
+for(i=0; i<myTblLine; i++){                                // 表の「行」のループ
+   document.write("<tr>");                                 // 行の開始
+   for(j=0; j<7; j++){                                     // 表の「列」のループ
+      document.write("<td align='center' ");               // 列(セル)の作成
+      myDat = myTable[j+(i*7)];                            // 書きこむ内容の取得
+      if (myDat==myToday)document.write("bgcolor='#00ffff'>"); // 今日のセルの色
+      else if(j==0)      document.write("bgcolor='#ffb6c1'>"); // 日曜のセルの色
+      else if(j==6)       document.write("bgcolor='#87CEFA'>");
+      else               document.write("bgcolor='#ffffe0'>"); // 平日のセルの色
+      document.write("<strong>",myDat,"</strong>");        // 日付セット
+      document.write("</td>");                             // 列(セル)の終わり
+   }
+   document.write("</tr>");                                // 行の終わり
+}
+document.write("</table>");                                // 表の終わり
+// --></script>
+
+</body>
+<body bgcolor="#ffffff" onLoad="Time()">
+現在の時刻：<input type ="text" id = "Timer"; style="width:200px">
+
+</html>

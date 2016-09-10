@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+<!--
+h1 {
+color: red;
+}
+-->
+</style>
+<meta charset="utf-8">
+<title>YAHOO!ニュース　ITメディアビシネスRSS取得</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+<script src="http://www.google.com/jsapi"></script>
+
+<script>
+google.load("feeds", "1");
+$(document).ready(function(){
+		var url = $("#url").val();
+		var feed = new google.feeds.Feed(url);
+		feed.setNumEntries(10);
+		feed.load(function(res){
+			if(!res.error){
+				$("#rss").html("");
+				$.each(res.feed.entries, function(i){
+					var d = new Date(this.publishedDate);
+					var w = ["日", "月", "火", "水", "木", "金", "土"];
+					var dstr = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate() + "(" + w[d.getDay()] + ")" +　d.getHours() + "時" + d.getMinutes() + "分" + d.getSeconds() + "秒";		//日付を示す日本語文字列作成
+					$("#rss").append("<div><a href='" + this.link + "'>" + dstr + " : " + this.title + "</a></div><hr>");
+				});
+			}
+		});
+	});
+
+  function Time() {
+    week = new Array("日","月","火","水","木","金","土");
+    year = (new Date()).getFullYear();
+    month = (new Date()).getMonth() + 1;
+    date = (new Date()).getDate();
+    day = (new Date()).getDay();
+    hours = (new Date()).getHours();
+    minutes = (new Date()).getMinutes();
+    seconds = (new Date()).getSeconds();
+      document.formN.textN.value = year+"年"+month+"月"+date+"日"+"("+week[day]+") "+hours+"時"+minutes+"分"+seconds+"秒";
+      setTimeout("Time()",1000);
+}
+</script>
+</head>
+
+<body>
+<a href="http://localhost:8888/home.htm"><h1>YAHOO!ニュース ITメディアビシネス(RSS)</h1></a>
+下記のページのRSSを取得しています.<br>
+<input type ="text" id="url" value="http://headlines.yahoo.co.jp/rss/zdn_mkt-dom.xml" style="width:265px";>
+<hr>
+<div id="rss"></div>
+</body>
+<body bgcolor="#ffffff" onLoad="Time()">
+<form name="formN">
+現在の時刻：<input type ="text" size="28" name="textN";>
+
+</html>
