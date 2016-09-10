@@ -1,3 +1,3 @@
-# yahooRS
+# yahoRSS
 
 javaScriptとyhaooRSSを利用したwebサイトです
